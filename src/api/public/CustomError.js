@@ -1,21 +1,21 @@
 class InvalidCpfException extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "InvalidCpfException";
+  constructor() {
+    super("CPF is not Valid.");
+    this.type = "InvalidCpfException";
   }
 }
 
 class ExistsCpfException extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "ExistsCpfException";
+  constructor() {
+    super("CPF already exists.");
+    this.type = "ExistsCpfException";
   }
 }
 
 class NotFoundCpfException extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "NotFoundCpfException";
+  constructor() {
+    super("CPF is not Found");
+    this.type = "NotFoundCpfException";
   }
 }
 

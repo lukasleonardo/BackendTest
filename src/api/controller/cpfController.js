@@ -1,29 +1,75 @@
 const cpf = require("../model/cpfModel");
 const err = require("../public/CustomError");
-const { validateCpf } = require("../public/util");
+const util = require("../public/util");
 
 class cpfController {
   async addCpf(req, res) {
-    const data = await cpf.create(req.body);
-
-    return res.status(200).json(data);
+    const info = req.body;
+    try {
+      if (util.validateCpf(req.body.cpf) === false) {
+        throw new err.InvalidCpfException();
+      }
+      const data = await cpf.create(info);
+      return res.status(200).json(data);
+    } catch (e) {
+      if (e["code"] === 11000) {
+        console.log("duplicado");
+        throw new err.ExistsCpfException();
+      }
+      if (e instanceof err.InvalidCpfException) {
+        console.log("cheguei aqui!!!!!");
+      }
+      res.status(422).json(`type: ${e.type},  message:${e.message}`);
+    }
   }
 
   async findAllCpf(req, res) {
-    const data = await cpf.find({});
-    res.status(200).json(data);
+    try {
+      const data = await cpf.find({});
+      res.status(200).json(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async findByCpf(req, res) {
-    const data = await cpf.findOne({ cpf: req.params });
-
-    return res.status(200).json(data);
+    try {
+      if (util.validateCpf(req.params.cpf) === false) {
+        throw new err.InvalidCpfException();
+      }
+      const data = await cpf.findOne({ cpf: req.params.cpf });
+      if (data === null) {
+        throw new err.NotFoundCpfException();
+      }
+      return res.status(200).json(data);
+    } catch (e) {
+      if (e instanceof err.InvalidCpfException) {
+        console.log(e);
+      } else if (e instanceof err.NotFoundCpfException) {
+        console.log(e);
+      }
+      res.status(422).json(`type: ${e.type},  message:${e.message}`);
+    }
   }
 
   async deleteByCpf(req, res) {
-    const data = await cpf.findOneAndDelete({ cpf: req.params });
-
-    return res.status(200).json(data);
+    try {
+      if (util.validateCpf(req.params.cpf) === false) {
+        throw new err.InvalidCpfException();
+      }
+      const data = await cpf.findOneAndDelete({ cpf: req.params.cpf });
+      if (data === null) {
+        throw new err.NotFoundCpfException();
+      }
+      return res.status(200).json(data);
+    } catch (e) {
+      if (e instanceof err.InvalidCpfException) {
+        console.log(e);
+      } else if (e instanceof err.NotFoundCpfException) {
+        console.log(e);
+      }
+      res.status(422).json(`type: ${e.type},  message:${e.message}`);
+    }
   }
 }
 

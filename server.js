@@ -1,34 +1,17 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const db = require("./src/database/database");
-const bodyParser = require("body-parser");
 require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
 const port = process.env.PORT;
+require("./src/database/database.js");
 
-class App {
-  constructor() {
-    this.express = express();
+const app = express();
+app.listen(port, () => {
+  console.log("estou rodando na porta " + port);
+});
 
-    this.database();
-    this.middleware();
-    this.routes();
+//middlewares
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-    this.express.listen(port, () => {
-      console.log(`Api funcionando na porta ${port}`);
-    });
-  }
-
-  database() {
-    mongoose.connect(db.uri, { useNewUrlParser: true });
-  }
-
-  middleware() {
-    this.express.use(bodyParser.urlencoded({ extended: false }));
-    this.express.use(bodyParser.json());
-  }
-
-  routes() {
-    this.express.use(require("./routes"));
-  }
-}
-module.exports = new App().express;
+//Rotas
+app.use(require("./routes.js"));

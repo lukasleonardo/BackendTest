@@ -1,3 +1,10 @@
-module.exports = {
-  uri: "mongodb://localhost:27017/restrictedList",
-};
+require("dotenv").config();
+const mongoose = require("mongoose");
+const strConnect = process.env.MONGO_URI;
+
+mongoose.Promise = global.Promise;
+mongoose.set("strictQuery", false);
+mongoose
+  .connect(strConnect, { useNewUrlParser: true })
+  .then(() => console.log("Conectado ao MongoDb em:" + strConnect))
+  .catch((e) => console.log(e));

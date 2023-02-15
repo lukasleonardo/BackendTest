@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const err = require("../public/CustomError");
+const util = require("../public/util");
 
 const cpfSchema = new mongoose.Schema({
   cpf: {
