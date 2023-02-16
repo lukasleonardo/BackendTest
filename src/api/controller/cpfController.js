@@ -13,13 +13,13 @@ class cpfController {
       return res.status(200).json(data);
     } catch (e) {
       if (e["code"] === 11000) {
-        console.log("duplicado");
-        throw new err.ExistsCpfException();
+        const y = new err.ExistsCpfException();
+        res.status(422).json(`type: ${y.type},  message:${y.message}`);
       }
       if (e instanceof err.InvalidCpfException) {
         console.log("cheguei aqui!!!!!");
+        res.status(422).json(`type: ${e.type},  message:${e.message}`);
       }
-      res.status(422).json(`type: ${e.type},  message:${e.message}`);
     }
   }
 

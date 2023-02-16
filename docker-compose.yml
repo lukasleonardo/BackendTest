@@ -1,0 +1,43 @@
+version: "1"
+services:
+  app:
+    container_name: "RestrictedListApp"
+    restart: always
+    build: .
+    environment:
+      - MONGO_URI=mongodb://mongo/restrictedList
+      - PORT=3000
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    command: npm start
+
+  app-dev:
+    container_name: "RestrictedListApp-dev"
+    restart: always
+    build: .
+    environment:
+      - MONGO_URI=mongodb://mongo/restrictedList
+      - PORT=3001
+      - NODE_ENV=developer
+    ports:
+      - "3001:3001"
+      - "5555:5555"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    command: node_modules/.bin/nodemon -L --inspect=5555 server.js
+    volumes:
+      - ./:/usr/node/
+
+  mongo:
+    container_name: "mongo"
+    image: mongo
+    ports:
+      - "27017:27017"
+    command: mongod --logpath=/dev/null # --quiet
