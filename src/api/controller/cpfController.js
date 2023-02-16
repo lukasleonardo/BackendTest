@@ -32,7 +32,7 @@ class cpfController {
     }
   }
 
-  async findByCpf(req, res) {
+  async checkCpf(req, res) {
     try {
       if (util.validateCpf(req.params.cpf) === false) {
         throw new err.InvalidCpfException();
@@ -52,7 +52,7 @@ class cpfController {
     }
   }
 
-  async deleteByCpf(req, res) {
+  async removeCpf(req, res) {
     try {
       if (util.validateCpf(req.params.cpf) === false) {
         throw new err.InvalidCpfException();

@@ -6,7 +6,7 @@ require("./src/database/database.js");
 
 const app = express();
 app.listen(port, () => {
-  console.log("estou rodando na porta " + port);
+  console.log(`Aplicação ativa na porta: ${port} => http://localhost:3001/cpf`);
 });
 
 //middlewares

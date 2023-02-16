@@ -9,8 +9,8 @@ router.get("/cpf", cpfController.findAllCpf);
 router.post("/cpf", cpfController.addCpf);
 
 //rota para checar cpf
-router.get("/cpf/:cpf", cpfController.findByCpf);
+router.get("/cpf/:cpf", cpfController.checkCpf);
 
-router.delete("/cpf/:cpf", cpfController.deleteByCpf);
+router.delete("/cpf/:cpf", cpfController.removeCpf);
 
 module.exports = router;
