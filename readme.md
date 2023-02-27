@@ -4,10 +4,11 @@
 
 ### Features
 
-- [x] Rotas de cadastrar CPF
+- [x] Rota de cadastrar CPF
 - [x] Checar CPF
-- [x] Listar todos os CPF's
-- [x] Deletar CPF
+- [x] Listar todos os CPFs
+- [x] Remover CPFs
+- [x] Teste de rotas com Jest
 - [x] Containers Docker
 
 ### Pré-requisitos
@@ -37,4 +38,4 @@ Apos instalado os pre requisitos.
 - Para rodar a versão developer usar: "docker-compose up app-dev"
 - Para rodar a versão production usar: "docker-compose up app"
 
-### Autor: Lucas Henrique da Costa Leoanrdo
+### Autor: Lucas Henrique da Costa Leonardo

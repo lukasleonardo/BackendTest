@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
-const err = require("../public/CustomError");
-const util = require("../public/util");
 
+//modelo do cpf no banco de dados contendo cpf e data de criação
 const cpfSchema = new mongoose.Schema({
   cpf: {
     type: String,
-    unique: true,
+    unique: true, // restrição de integridade de não duplicidade
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now, // data da criação, por padrão já é ISO
   },
 });
 
