@@ -8,9 +8,10 @@ router.get("/cpf", cpfController.findAllCpf);
 //Rota de criação de um novo CPF
 router.post("/cpf", cpfController.addCpf);
 
-//rota para checar cpf
+//Rota para checar cpf
 router.get("/cpf/:cpf", cpfController.checkCpf);
 
+// Rota para deletar cpf
 router.delete("/cpf/:cpf", cpfController.removeCpf);
 
 module.exports = router;
