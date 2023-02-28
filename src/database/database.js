@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const strConnect = process.env.MONGO_URI;
-//Conecção com o banco de dados MongoDB
+//Conexão com o banco de dados MongoDB
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 mongoose
